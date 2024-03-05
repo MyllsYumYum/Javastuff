@@ -1,7 +1,7 @@
 //in the bengingging
 import java.util.Scanner;
 import java.util.ArrayList;
-
+//test change
 interface libraryItem {
     Scanner sc = new Scanner(System.in);
     void borrowitem();
@@ -39,6 +39,39 @@ class book implements libraryItem{
     public boolean isBorrowed(){
         return status;
     }
+
+}
+abstract class LibraryUser {
+    ArrayList<String> borrowed = new ArrayList<String>();
+    void borrowitem(dvd item){
+        item.borrowitem();
+        borrowed.add(item.title);
+
+    }
+    void returnitem(dvd item){
+        item.returnitem();
+        borrowed.remove(item.title);
+    }
+    void borrowitem(book item){
+        item.borrowitem();
+        borrowed.add(item.title);
+
+    }
+    void returnitem(book item){
+        item.returnitem();
+        borrowed.remove(item.title);
+    }
+    abstract void printItemsBorrowed();
+}
+
+class Student extends LibraryUser{
+
+    void printItemsBorrowed(){
+        borrowed.forEach((n) -> System.out.println(n));
+    }
+}
+
+class Teacher {
 
 }
 
@@ -81,12 +114,46 @@ public class libmansy {
 
     static ArrayList<book> shelf = new ArrayList<book>();
     static ArrayList<dvd> stack = new ArrayList<dvd>();
+    static void libmansy()
+    {try {
+        book test1 = new book("50 Shades of grey","some horny guy","2000");
+        shelf.add(test1);
+        test1 = new book("How to train your dragon","some childish guy","2001");
+        shelf.add(test1);
+        test1 = new book("How to cook meth","some guy who found he had cancer","2002");
+        shelf.add(test1);
+        test1 = new book("Harry potter","Jenkins","2003");
+        shelf.add(test1);
+        test1 = new book("Roblox Lua for Noobs","Builderman","2012");
+        shelf.add(test1);
+        System.out.println("book added");
+        dvd test2 = new dvd("Avengers","Iron man","2012");
+        stack.add(test2);
+        test2 = new dvd("Avengers 2", "Iron man", "2013");
+        stack.add(test2);
+        test2 = new dvd("Avengers 3", "Tony Stark", "2014");
+        stack.add(test2);
+        test2 = new dvd("Avengers Infinity War", "Captain America", "2016");
+        stack.add(test2);
+        test2 = new dvd("Avengers End Game", "Hulk", "2017");
+        stack.add(test2);
+    } catch (Exception e) {
+        System.out.println("could not create");
+    }
 
-    void menu(){
+    }
+    {}
+    static void menu(){
+        for (int index = 0; index < shelf.size(); index++) {
+        System.out.println(shelf.get(index).title);
+        System.out.println(shelf.get(index).author);
+        System.out.println(shelf.get(index).pubYear);
+        System.out.println(shelf.get(index).status);
+        }
 
     }
     
-    void additem(){
+    static void additem(){
         String num = sc.nextLine();
         switch (num) {
             case "1":
@@ -100,5 +167,7 @@ public class libmansy {
     }
     public static void main(String[] args) {
         
+        libmansy();
+        menu();
     }
 }
